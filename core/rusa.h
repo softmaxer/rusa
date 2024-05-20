@@ -12,7 +12,7 @@
 
 const unsigned long MEGABYTE = 1024 * 1024;
 
-void available_ram(size_t* freeram);
+void available_ram(unsigned long* freeram);
 size_t delta(size_t* prev_usage, size_t* curr_usage);
 
 void proc_suspend(pid_t pid);

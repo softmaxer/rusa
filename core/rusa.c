@@ -1,6 +1,6 @@
 #include "rusa.h"
 
-void available_ram(size_t* freeram) {
+void available_ram(unsigned long* freeram) {
   struct sysinfo* ram_usage = malloc(sizeof(struct sysinfo));
   sysinfo(ram_usage);
   *freeram = ram_usage->freeram / MEGABYTE;
