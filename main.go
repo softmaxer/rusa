@@ -14,8 +14,8 @@ import (
 )
 
 func main() {
-	C.test_hello()
-	ramUsage := C.ulong(0)
-	C.available_ram(&ramUsage)
-	fmt.Println("ram usage: ", ramUsage)
+	var ram uint64
+	ramLong := C.ulong(ram)
+	C.available_ram(&ramLong)
+	fmt.Printf("Free ram available: %dMB\n", ramLong)
 }

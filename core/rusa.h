@@ -17,6 +17,5 @@ size_t delta(size_t* prev_usage, size_t* curr_usage);
 
 void proc_suspend(pid_t pid);
 void proc_restart(pid_t pid);
-extern void test_hello();
 
 #endif // RUSA_CORE
