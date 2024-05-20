@@ -13,7 +13,7 @@ c:
 	gcc -shared -o ${TESTLIBPATH}/librusa.so ${TESTLIBPATH}/rusa.o
 
 go:
-	go build -o app *.go
+	go build
 
 run:
-	./app
+	./rusa
