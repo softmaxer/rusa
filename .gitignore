@@ -3,3 +3,4 @@ app
 core/rusa
 rusa
 core/rusa.o
+.clang-format

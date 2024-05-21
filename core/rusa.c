@@ -1,4 +1,5 @@
 #include "rusa.h"
+
 #include <sys/sysinfo.h>
 
 mem_info *available_ram() {
