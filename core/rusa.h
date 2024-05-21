@@ -1,21 +1,32 @@
 #ifndef RUSA_CORE
 #define RUSA_CORE
 
-#include <stdlib.h>
+#include <signal.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/resource.h>
 #include <sys/sysinfo.h>
+#include <sys/types.h>
 #include <time.h>
 #include <unistd.h>
-#include <sys/types.h>
-#include <signal.h>
 
 const unsigned long MEGABYTE = 1024 * 1024;
 
-void available_ram(unsigned long* freeram);
-size_t delta(size_t* prev_usage, size_t* curr_usage);
+typedef struct process {
+  pid_t pid;
+  unsigned long mem_usage;
+  int time;
+} process;
 
-void proc_suspend(pid_t pid);
-void proc_restart(pid_t pid);
+typedef struct mem_info {
+  unsigned long free;
+  unsigned long used;
+  unsigned long swap;
+  process **procs;
+} mem_info;
+
+mem_info *available_ram();
+
+void get_procs(unsigned short len, process **procs);
 
 #endif // RUSA_CORE

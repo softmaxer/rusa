@@ -1,20 +1,23 @@
 #include "rusa.h"
+#include <sys/sysinfo.h>
 
-void available_ram(unsigned long* freeram) {
-  struct sysinfo* ram_usage = malloc(sizeof(struct sysinfo));
+mem_info *available_ram() {
+  struct sysinfo *ram_usage = malloc(sizeof(struct sysinfo));
   sysinfo(ram_usage);
-  *freeram = ram_usage->freeram / MEGABYTE;
+  mem_info *mymem_info = malloc(sizeof(mem_info));
+  mymem_info->free = ram_usage->freeram / MEGABYTE;
+  mymem_info->used = (ram_usage->totalram - ram_usage->freeram) / MEGABYTE;
+  mymem_info->swap = ram_usage->totalswap / MEGABYTE;
+  mymem_info->procs = (process **)malloc(ram_usage->procs * sizeof(process *));
+  get_procs(ram_usage->procs, mymem_info->procs);
   free(ram_usage);
+  return mymem_info;
 }
 
-size_t delta(size_t* curr_usage, size_t* prev_usage) {
-  return *curr_usage - *prev_usage;
-}
-
-void proc_suspend(pid_t pid) {
-  kill(pid, SIGSTOP);
-}
-
-void proc_restart(pid_t pid) {
-  kill(pid, SIGCONT);
+void get_procs(unsigned short len, process **procs) {
+  process **ptr = procs;
+  for (int i = 0; i < len; i++) {
+    ptr[i] = malloc(sizeof(process));
+  }
+  return;
 }
