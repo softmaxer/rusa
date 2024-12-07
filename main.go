@@ -14,8 +14,6 @@ import (
 )
 
 func main() {
-	var ram uint64
-	ramLong := C.ulong(ram)
-	C.available_ram(&ramLong)
-	fmt.Printf("Free ram available: %dMB\n", ramLong)
+	var avail C.ulong = C.available_ram().free
+	fmt.Printf("Free ram available: %dMB\n", avail)
 }
